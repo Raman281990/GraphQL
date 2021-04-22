@@ -1,0 +1,51 @@
+"""
+Schema file is collection of graphQL object types
+"""
+#This is a custom scalar type
+scalar DateTime
+#This is a GraphQL Object
+type Attendee {
+    id: ID!
+   name:String
+}
+type Speaker {
+    id: ID!,
+    name:String,
+    twitter:String
+}
+type TechTalk {
+    id: ID!,
+    title: String,
+    description: String,
+    heldOn: DateTime!
+    speaker: [Speaker]
+}
+type Score {
+    title: String
+    score: Int
+}
+#Input for Mutation
+input SpeakerInput {
+    name: String!,
+    twitter: String
+}
+#Query use to fetch data from GraphQL server
+type Query {
+    allTalks:[TechTalk]
+    allAttendees:[Attendee]
+    allSpeakers:[Speaker]
+}
+#Mutation is used to perform update operation on data
+type Mutation {
+    addSpeaker(speaker: SpeakerInput) : Speaker
+}
+#Subscription is used to get continous data stream from the server
+type Subscription {
+    talkScores(title: String!): Score
+}
+#Operations
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}

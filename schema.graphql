@@ -1,0 +1,53 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}
+
+type Attendee {
+    id: ID!
+    name: String
+}
+
+type IgniteTalk {
+    description: String
+    heldOn: DateTime
+    id: ID!
+    speaker: [Speaker]
+    title: String
+}
+
+type Mutation {
+    addSpeaker(speaker: SpeakerInput): Speaker
+}
+
+type Query {
+    allAttendees: [Attendee]
+    allSpeakers: [Speaker]
+    allTalks: [IgniteTalk]
+}
+
+type Score {
+    score: Int
+    title: String
+}
+
+type Speaker {
+    id: ID!
+    name: String
+    twitter: String
+}
+
+type Subscription {
+    talkScores(title: String!): Score
+}
+
+input SpeakerInput {
+    name: String
+    twitter: String
+}
+
+
+scalar DateTime
